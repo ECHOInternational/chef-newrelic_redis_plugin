@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - Vagrantfile
+Metrics/LineLength:
+  Max: 100

@@ -1,0 +1,49 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.7
+  - name: centos-7.2
+  - name: debian-7.9
+  - name: debian-8.3
+  - name: ubuntu-12.04
+  - name: ubuntu-14.04
+  - name: ubuntu-15.10
+
+suites:
+  - name: default
+    run_list:
+      - 'recipe[redisio]'
+      - 'recipe[redisio::enable]'
+      - 'recipe[newrelic::server_monitor_agent]'
+      - 'recipe[newrelic_redis_plugin::install]'
+      - 'recipe[newrelic_redis_plugin::enable]'
+    attributes:
+      newrelic:
+        license: 'INSERT YOUR LICENSE HERE BEFORE TESTING'
+      redisio:
+        servers:
+          -
+            port: '6379'
+            name: 'ActiveJob'
+          -
+            port: '6380'
+            name: 'Discourse'
+      newrelic_redis_plugin:
+        ruby_interpreter: '/opt/chef/embedded/bin/ruby'
+        newrelic_license_key: 'INSERT YOUR LICENSE HERE BEFORE TESTING'
+        newrelic_user: 'newrelic'
+        newrelic_group: 'newrelic'
+        instances:
+          -
+            name: "ActiveJob_redis"
+            url: "redis://localhost:6379"
+            database: "db0"
+          -
+            name: "Discourse_redis"
+            url: "redis://localhost:6380"
+            database: "db0"
