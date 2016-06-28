@@ -5,7 +5,7 @@ maintainer_email 'nflood@echonet.org'
 license 'MIT'
 description 'Installs/Configures a Redis monitoring plugin for Newrelic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.3.0'
+version '1.0.0'
 source_url 'https://github.com/ECHOInternational/chef-newrelic_redis_plugin'
 issues_url 'https://github.com/ECHOInternational/chef-newrelic_redis_plugin/issues'
 
